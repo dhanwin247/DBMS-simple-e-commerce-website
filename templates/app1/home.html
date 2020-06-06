@@ -27,20 +27,13 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'about' %}">About</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Project
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#goal-scroll">Goal</a>
-                        <a class="dropdown-item" href="#objectives-scroll">Objectives</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#simulations-scroll">Simulations</a>
-                    </div>
-                </li>
             </ul>
 
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'signup_new' %}">Signup<span class="sr-only">(current)</span></a>
+                </li>
+
                 <li class="nav-item active">
                     <a class="navbar-brand" href="https://nitk.ac.in">
                         <img src="https://www.noticebard.com/wp-content/uploads/2020/01/NITK-Surathkal.png">
@@ -48,6 +41,6 @@
                 </li>
             </ul>
         </div>
-        </nav>
+    </nav>
 </body>
 </html>
