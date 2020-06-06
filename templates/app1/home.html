@@ -22,24 +22,10 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="about/studentInfo.html">About</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Concepts
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="concepts/disk_scheduling.html">Disk Scheduling</a>
-                        <a class="dropdown-item" href="concepts/process_scheduling.html">Process Scheduling</a>
-                        <a class="dropdown-item" href="concepts/demand_paging.html">Demand Paging</a>
-                        <a class="dropdown-item" href="concepts/contiguous_memory_allocation.html">Contiguous Memory Allocation</a>
-                        <a class="dropdown-item" href="concepts/file_allocation.html">File Allocation</a>
-                        <a class="dropdown-item" href="concepts/deadlocks.html">Deadlocks</a>
-                        <a class="dropdown-item" href="concepts/syncronization.html">Process Synchronization</a>                        
-                    </div>
+                    <a class="nav-link" href="{% url 'about' %}">About</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
