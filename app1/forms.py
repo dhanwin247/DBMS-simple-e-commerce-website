@@ -34,9 +34,9 @@ class SignupForm(forms.ModelForm):
         if not(first_name.isalpha()):
             raise forms.ValidationError("First Name should only contain alphabets. Are you Elon Musk's son? If you are, you are too young. Bye bye!")
         if not(last_name.isalpha()):
-            raise forms.ValidationError("First Name should only contain alphabets.")
+            raise forms.ValidationError("Last Name should only contain alphabets.")
         
-    class Meta:
+    class Meta():
         model = User
         fields = "__all__"
     
