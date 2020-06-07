@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from . import forms
 from app1.models import User
+from app1.forms import SignupForm
 
 # Create your views here.
 def home(request):
@@ -38,3 +39,15 @@ def signup_new(request):
 
     return render(request, 'app1/signup_new.html')
 
+def signup2(request):
+    form = SignupForm
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+
+        if form.is_valid():
+            form.save(commit=True)
+            return home(request)
+        else:
+            print('ERROR FORM INVALID')
+
+    return render(request, 'app1/signup2.html', {'form':form})
