@@ -33,4 +33,4 @@ class SignupForm(forms.ModelForm):
 
     class Meta():
         model = User
-        exclude = ["userid"]
+        fields = "__all__"
