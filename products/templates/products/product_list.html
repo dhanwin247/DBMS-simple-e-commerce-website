@@ -5,7 +5,7 @@
 <ol>
   {% for phone in phone_list %}
   <h3>
-    <li>{{ phone.name }}</li>
+    <li><a href="{{phone.id}}">{{ phone.name }}</a></li>
   </h3>
   {% endfor %}
 </ol>
