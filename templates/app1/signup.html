@@ -1,21 +1,70 @@
 <!DOCTYPE html>
-{% load static %}
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>Sign Up Page</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/home.css' %}">
-  </head>
-  <body>
-    <h1>Sign Up page- Form is done. Rest is up to Varun :p</h1>
+{% extends "app1/base.html" %}
+{% block inherit %}
     <div class="container">
-      <form method="post">
-        {% csrf_token %}
-        <div class="form-group">
-          {{form.as_p}}
-        </div>
-      </form>
+        {% if registered %}
+            <div class="jumbotron">
+                <h1>Thank you for Registering!</h1>
+            </div>
+        {% else %}
+            <form method="POST">
+                {% csrf_token %}
+
+                <input type="hidden" name="csrf-token" value="CIwNZNlR4XbisJF39I8yWnWX9wX4WFoz" />
+
+                <div class="form-group">
+                    {% csrf_token %}
+                    <label for="user_username">Username:</label>
+                    <!-- <input name="username" type="text" class="form-control" id="user_username" required> -->
+                    {{ form.username }}
+                </div>
+
+                <div class="form-group">
+                    {% csrf_token %}
+                    <label for="InputPassword">Password:</label>
+                    <!-- <input name="user_password" type="password" class="form-control" id="InputPassword" required> -->
+                    {{ form.password }}
+                </div>
+
+                <div class="form-group">
+                    {% csrf_token %}
+                    <label for="InputEmail">Email address:</label>
+                    <!-- <input name="user_email" type="email" class="form-control" id="InputEmail" required> -->
+                    {{ form.email }}
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+
+                <div class="form-group">
+                    {% csrf_token %}
+                    <label for="user_first_name">First Name:</label>
+                    <!-- <input name="first_name" type="text" class="form-control" id="user_first_name" required> -->
+                    {{ form.first_name }}
+                </div>
+
+                <div class="form-group">
+                    {% csrf_token %}
+                    <label for="user_last_name">Last Name:</label>
+                    <!-- <input name="last_name" type="text" class="form-control" id="user_last_name"> -->
+                    {{ form.last_name }}
+                </div>
+
+                <div class="form-group">
+                    {% csrf_token %}
+                    <label for="user_address">Address:</label>
+                    <!-- <input name="delivery_address" type="text" class="form-control" id="user_address" required> -->
+                    {{ form.delivery_address }}
+                </div>
+
+                <div class="form-group">
+                    {% csrf_token %}
+                    <label for="user_phone_number">Phone Number:</label>
+                    <!-- <input name="phone_number" type="number" class="form-control" id="user_phone_number" required> -->
+                    {{ form.phone_number }}
+                </div>
+
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            </form>
+        {% endif %}
     </div>
-  </body>
-</html>
+{% endblock %}
