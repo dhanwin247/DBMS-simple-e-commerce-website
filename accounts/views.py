@@ -5,28 +5,31 @@ from accounts.forms import SignupForm
 from django.contrib.auth.hashers import make_password
 
 #
-from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
-# from django.core.urlresolvers import reverse
 from django.urls import reverse
-from django.contrib.auth.decorators import login_required
+
+login_flag = False
 
 # Create your views here.
 def home(request):
-    return render(request,'accounts/home.html')
+    return render(request,'accounts/home.html', {'login_flag':login_flag})
 
 # def login(request):
 #     return render(request,'accounts/login.html')
 
 def about(request):
-    return render(request,'accounts/about.html')
+    return render(request,'accounts/about.html', {'login_flag':login_flag})
 
-@login_required
+# @login_required
 def user_logout(request):
-    logout(request)
+    # logout(request)
+    global login_flag
+    login_flag = False
     return HttpResponseRedirect(reverse('accounts:home'))
 
 def signup(request):
+
+    global login_flag
 
     user_form = SignupForm
 
@@ -36,11 +39,12 @@ def signup(request):
         user_form = SignupForm(data=request.POST)
 
         if user_form.is_valid():
-            user = user_form.save()
-            user.password = make_password(user.password)
-            user.save()
+            user_form.save()
+            # user.password = make_password(user.password)
+            # user.save()
 
             registered = True
+            login_flag = True
 
         else:
             print('user_form.errors')
@@ -49,24 +53,25 @@ def signup(request):
 
 def user_login(request):
 
+    global login_flag
+
     if request.method == 'POST': 
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        usrname = request.POST.get('username')
+        passwrd = request.POST.get('password')
 
-        user = authenticate(username=username, password=password)
-
-        if user:
-            if user.is_active:
-                login(request, user)
-                return HttpResponseRedirect(reverse('accounts:home'))
-
-            else: 
-                return HttpResponse("ACCOUNT NOT ACTIVE")
+        print(User.objects.filter(username=usrname).exists())
+        if User.objects.filter(username=usrname).exists():
+            curr_user = User.objects.get(username=usrname)
+            if curr_user.password == passwrd:
+                login_flag = True
+                print("Logged in!")
+                # return HttpResponseRedirect(reverse('accounts:home'))
+                return render(request, 'accounts/home.html', {'login_flag':login_flag})
 
         else:
             print("Someone tried to login and failed!")
-            print("Username: {} and password: {}".format(username,password))
+            print("Type: {} Username: {} and password: {}".format(type(usrname),usrname,passwrd))
             return HttpResponse("invalid login details supplied!")
 
     else:
-        return render(request, 'accounts/login.html', {})
+        return render(request, 'accounts/login.html',{'login_flag':login_flag})

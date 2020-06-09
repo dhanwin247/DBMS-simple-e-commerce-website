@@ -7,6 +7,8 @@
                 <h1>Thank you for Registering!</h1>
             </div>
         {% else %}
+            {% csrf_token %}
+            
             <form method="POST">
                 {% csrf_token %}
 
