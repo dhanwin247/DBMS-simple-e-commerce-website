@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('accounts.urls')),
     path('logout/',views.user_logout,name='user_logout'),
-    path('products/',include(produrls,namespace='products'))
+    path('products/',include(produrls,namespace='products')),
+    path('merchant/',include(merchant.urls)),
 ]

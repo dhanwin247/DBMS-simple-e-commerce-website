@@ -33,11 +33,12 @@ def user_logout(request):
 
 def merchant_login(request):
 
+    global login_flag 
+    global curr_merchant
+
     if request.method == 'POST': 
         merchant_username = request.POST.get('merchant_username')
         merchant_password = request.POST.get('merchant_password')
-
-        merchant = authenticate(username=merchant_username, password=merchant_password)
 
         if merchant:
             if merchant.is_active:
