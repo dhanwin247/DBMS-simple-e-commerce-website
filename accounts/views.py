@@ -31,12 +31,10 @@ def user_logout(request):
     global login_flag
 
     login_flag = False
-    print(curr_user + "logged out")
+    # print(curr_user)
     curr_user = None
     # print("current user is " + curr_user)
     return HttpResponseRedirect(reverse('accounts:home'))
-
-
 
 
 def signup(request):
@@ -51,13 +49,15 @@ def signup(request):
         user_form = SignupForm(data=request.POST)
 
         if user_form.is_valid():
-            user_form.save()
+            curr_user_form = user_form.save()
             # user.password = make_password(user.password)
             # user.save()
 
             registered = True
             login_flag = True
-            curr_user = usrname
+            curr_user = curr_user_form.username
+
+            return HttpResponseRedirect(reverse('accounts:home'))
 
         else:
             print('user_form.errors')

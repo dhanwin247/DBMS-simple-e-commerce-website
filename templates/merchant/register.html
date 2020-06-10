@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-{% extends "merchant base.html" %}
+{% extends "merchant/base.html" %}
 
 {% block inherit %}
     <div class="container">
-        {% if registered %}
+        <!-- {% if registered %}
             <div class="jumbotron">
                 <h1>Thank you for Registering!</h1>
             </div>
-        {% endif %}
+        {% endif %} -->
         {% if login_flag == True %}
             <form method="POST">
                 {% csrf_token %}

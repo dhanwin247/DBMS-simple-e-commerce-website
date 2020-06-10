@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from . import forms
 from merchant.forms import ProductForm
+from merchant.models import Merchant
 # from products.forms import ProductForm
 
 from django.contrib.auth import authenticate, login, logout
@@ -9,10 +10,15 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
+login_flag = False
+curr_merchant = None
+
 # Create your views here.
 def register_product(request): 
 
-    new_merchant_form = ProductForm
+    global login_flag
+
+    new_product_form = ProductForm
 
     registered = False
 
@@ -26,10 +32,18 @@ def register_product(request):
         else:
             print("ERROR FORM INVALID")
 
-@login_required
-def user_logout(request):
-    logout(request)
-    return HttpResponseRedirect(reverse('accounts:home'))
+    return render(request, 'merchant/register.html', {'form':new_product_form})
+
+# @login_required
+def merchant_logout(request):
+
+    global curr_merchant
+    # logout(request)
+    global login_flag
+
+    login_flag = False
+    curr_merchant = None
+    return HttpResponseRedirect(reverse('merchant'))
 
 def merchant_login(request):
 
@@ -37,21 +51,20 @@ def merchant_login(request):
     global curr_merchant
 
     if request.method == 'POST': 
-        merchant_username = request.POST.get('merchant_username')
-        merchant_password = request.POST.get('merchant_password')
+        merchant_usrname = request.POST.get('merchant_username')
+        merchant_passwrd = request.POST.get('merchant_password')
 
-        if merchant:
-            if merchant.is_active:
-                login(request, merchant)
-                return HttpResponseRedirect(reverse('accounts:home'))
-
-            else: 
-                return HttpResponse("ACCOUNT NOT ACTIVE")
+        if Merchant.objects.filter(merchant_username=merchant_usrname).exists() and Merchant.objects.get(merchant_username=merchant_usrname).merchant_password == merchant_passwrd:
+            print("Merchant Logged in!")
+            login_flag = True
+            curr_merchant = merchant_usrname
+            print("Current Merchant is " + curr_merchant)
+            return render(request, 'merchant/register.html', {'login_flag':login_flag})
 
         else:
             print("Someone tried to login and failed!")
-            print("Username: {} and password: {}".format(username,password))
+            print("Username: {} and password: {}".format(merchant_usrname,merchant_passwrd))
             return HttpResponse("invalid login details supplied!")
 
     else:
-        return render(request, 'accounts/login.html', {})
+        return render(request, 'merchant/register.html', {'login_flag':login_flag})

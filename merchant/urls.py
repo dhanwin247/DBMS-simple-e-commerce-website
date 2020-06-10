@@ -8,8 +8,7 @@ app_name = 'merchant'
 urlpatterns = [
     path('',views.merchant_login, name='merchant_login'),
     path('register',views.register_product, name='register_product'),
-    path('home/',account_views.home, name='home'),
     path('merchant_login/',views.merchant_login, name='merchant_login'),
-    # path('logout/',views.user_logout,name='logout')
-    path('about/',account_views.about, name='about'),
+    path('logout/',views.merchant_logout,name='logout')
+    # path('about/',account_views.about, name='about'),
 ]
