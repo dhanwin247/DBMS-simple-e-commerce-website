@@ -2,6 +2,7 @@ from django.shortcuts import render
 from accounts.models import User
 from accounts.forms import SignupForm
 from django.contrib.auth.hashers import make_password
+
 from django.views.generic.detail import DetailView
 from accounts.models import User, Cart, CartProduct
 from django.http import HttpResponseRedirect, HttpResponse
@@ -12,28 +13,21 @@ curr_user = None
 
 # Create your views here.
 def home(request):
+
     return render(request,'accounts/home.html', {'login_flag':login_flag})
 
-# def login(request):
-#     return render(request,'accounts/login.html')
-
 def about(request):
+    
     return render(request,'accounts/about.html', {'login_flag':login_flag})
 
-
-
-
-# @login_required
 def user_logout(request):
 
     global curr_user
-    # logout(request)
     global login_flag
 
     login_flag = False
-    # print(curr_user)
     curr_user = None
-    # print("current user is " + curr_user)
+    
     return HttpResponseRedirect(reverse('accounts:home'))
 
 
@@ -50,8 +44,6 @@ def signup(request):
 
         if user_form.is_valid():
             curr_user_form = user_form.save()
-            # user.password = make_password(user.password)
-            # user.save()
 
             registered = True
             login_flag = True
@@ -70,18 +62,17 @@ def signup(request):
 def user_login(request):
     global login_flag
     global curr_user
+
     if request.method == 'POST':
         usrname = request.POST.get('username')
         passwrd = request.POST.get('password')
 
         if User.objects.filter(username=usrname).exists() and User.objects.get(username=usrname).password == passwrd:
-            # curr_user = User.objects.get(username=usrname)
-            # if curr_user.password == passwrd:
             print("Logged in!")
             login_flag = True
             curr_user = usrname
             print("Current User is " + curr_user)
-            # return HttpResponseRedirect(reverse('accounts:home'))
+            
             return render(request, 'accounts/home.html', {'login_flag':login_flag})
 
         else:

@@ -2,13 +2,10 @@ from django.shortcuts import render
 from . import forms
 from merchant.forms import ProductForm
 from merchant.models import Merchant
-# from products.forms import ProductForm
 
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
-# from django.core.urlresolvers import reverse
 from django.urls import reverse
-from django.contrib.auth.decorators import login_required
 
 login_flag = False
 curr_merchant = None
@@ -60,7 +57,6 @@ def merchant_login(request):
             curr_merchant = merchant_usrname
             print("Current Merchant is " + curr_merchant)
             return HttpResponseRedirect(reverse('merchant:register_product'))
-            # return render(request, 'merchant/register.html', {'login_flag':login_flag})
 
         else:
             print("Someone tried to login and failed!")
