@@ -27,26 +27,11 @@
             </ul>
 
             <ul class="navbar-nav ml-auto">
-                {% if merchant.is_authenticated %}
+                {% if login_flag == True %}
                     <li class="nav-item active">
-                        <a class="nav-link" href="{% url 'user_logout' %}">Merchant Logout<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{% url 'merchant:logout' %}">Merchant Logout<span class="sr-only">(current)</span></a>
                     </li>
 
-                    
-                {% else %}
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{% url 'accounts:signup' %}">Signup<span class="sr-only">(current)</span></a>
-                    </li>
-
-                    <li>
-                        <a href=""></a>
-                    </li>
-                    <a class="nav-link" href="{% url 'accounts:user_login' %}">Login<span class="sr-only">(current)</span></a>
-                    <li class="nav-item active">
-                        <a class="navbar-brand" href="https://nitk.ac.in">
-                            <img src="https://www.noticebard.com/wp-content/uploads/2020/01/NITK-Surathkal.png">
-                        </a>
-                    </li>
                 {% endif %}
             </ul>
         </div>

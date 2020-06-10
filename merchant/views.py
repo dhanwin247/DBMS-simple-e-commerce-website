@@ -32,7 +32,7 @@ def register_product(request):
         else:
             print("ERROR FORM INVALID")
 
-    return render(request, 'merchant/register.html', {'form':new_product_form})
+    return render(request, 'merchant/register.html', {'form':new_product_form, 'login_flag':login_flag})
 
 # @login_required
 def merchant_logout(request):
@@ -43,11 +43,11 @@ def merchant_logout(request):
 
     login_flag = False
     curr_merchant = None
-    return HttpResponseRedirect(reverse('merchant'))
+    return HttpResponseRedirect(reverse('merchant:merchant_login'))
 
 def merchant_login(request):
 
-    global login_flag 
+    global login_flag
     global curr_merchant
 
     if request.method == 'POST': 
@@ -59,7 +59,8 @@ def merchant_login(request):
             login_flag = True
             curr_merchant = merchant_usrname
             print("Current Merchant is " + curr_merchant)
-            return render(request, 'merchant/register.html', {'login_flag':login_flag})
+            return HttpResponseRedirect(reverse('merchant:register_product'))
+            # return render(request, 'merchant/register.html', {'login_flag':login_flag})
 
         else:
             print("Someone tried to login and failed!")
