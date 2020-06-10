@@ -16,11 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from accounts import views
+from merchant import views
 from products import urls as produrls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('accounts.urls')),
     path('logout/',views.user_logout,name='user_logout'),
     path('products/',include(produrls,namespace='products')),
-    path('merchant/',include(merchant.urls)),
+    path('merchant/',include('merchant.urls')),
 ]

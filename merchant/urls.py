@@ -1,6 +1,6 @@
 from django.urls import path
-from merchant import views as account_views
-from accounts import views
+from merchant import views 
+from accounts import views as account_views
 
 #TEMPLATE URLS
 app_name = 'merchant'

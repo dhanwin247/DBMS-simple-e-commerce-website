@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from . import forms
-from merchant.forms import MerchantForm
-from products.forms import ProductForm
+from merchant.forms import ProductForm
+# from products.forms import ProductForm
 
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
