@@ -21,12 +21,11 @@ class Cart(models.Model):
     def __str__(self):
         return "Cart of %s" % self.user.username
 
-    def get_absolute_url(self):
-        return reverse('accounts:account_page', kwargs={'slug':user.username})
+
 
 class CartProduct(models.Model):
-    cart = models.ForeignKey(Cart,on_delete=models.CASCADE)
-    product = models.ManyToManyField(Phone,related_name='product_in_cart')
+    cart = models.ForeignKey(Cart,on_delete=models.CASCADE,related_name='cart_containing_product')
+    product = models.ForeignKey(Phone,on_delete=models.CASCADE,related_name='product_in_cart')
 
     def __str__(self):
         return "Item in cart: %s " % self.product.name

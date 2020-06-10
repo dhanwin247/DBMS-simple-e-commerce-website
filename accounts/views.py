@@ -93,8 +93,12 @@ def user_login(request):
         return render(request, 'accounts/login.html',{'login_flag':login_flag})
 
 def account_page_view(request):
-    return render(request, 'accounts/account_base.html')
-    # if Cart.objects.filter(user.username=curr_user).exists():
-    #     curr_cart = Cart.objects.get(user.username=curr_user)
-    #     curr_cart_product = CartProduct.objects.get(cart=curr_cart)
-    #     return render(request, 'accounts/account_page.html',{'cart':curr_cart, 'cart_products':curr_cart_product})
+    curruser = User.objects.get(username=curr_user)
+    if Cart.objects.filter(user=curruser).exists():
+        curr_cart = Cart.objects.get(user=curruser)
+        curr_cart_product=[]  #this is not working. get() can only return one object at a time.
+        curr_cart_product = CartProduct.objects.get(cart=curr_cart)
+        return render(request, 'accounts/account_page.html',{'cart':curr_cart, 'cart_products':curr_cart_product})
+
+    else:
+        return HttpResponse("Your cart is empty")

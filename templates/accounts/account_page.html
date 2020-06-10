@@ -1,0 +1,9 @@
+{% extends 'accounts/account_base.html' %}
+
+{% block inherit %}
+<h1>Welcome {{cart.user.username}}!</h1>
+    {% for cart_product in cart_products %}
+        <h3>Item : {{cart_product.product.name}}</h3>
+        <h3>Price : {{cart_product.product.price}}</h3>
+    {% endfor %}
+{% endblock %}
