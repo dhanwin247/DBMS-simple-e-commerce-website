@@ -20,7 +20,7 @@ from merchant import views
 from products import urls as produrls
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('accounts.urls')),
+    path('',include('accounts.urls',namespace='accounts')),
     path('logout/',views.user_logout,name='user_logout'),
     path('products/',include(produrls,namespace='products')),
     path('merchant/',include('merchant.urls')),
