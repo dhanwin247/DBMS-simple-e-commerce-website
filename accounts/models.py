@@ -16,7 +16,6 @@ class User(models.Model):
 
 class Cart(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
-    # username = user.username
 
     def __str__(self):
         return "Cart of %s" % self.user.username

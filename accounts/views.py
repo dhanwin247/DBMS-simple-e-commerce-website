@@ -13,26 +13,24 @@ curr_user = None
 
 # Create your views here.
 def home(request):
-
     return render(request,'accounts/home.html', {'login_flag':login_flag})
 
+
 def about(request):
-    
     return render(request,'accounts/about.html', {'login_flag':login_flag})
 
-def user_logout(request):
 
+def user_logout(request):
     global curr_user
     global login_flag
 
     login_flag = False
     curr_user = None
-    
+
     return HttpResponseRedirect(reverse('accounts:home'))
 
 
 def signup(request):
-
     global login_flag
 
     user_form = SignupForm
@@ -57,8 +55,6 @@ def signup(request):
     return render(request, 'accounts/signup.html', {'form':user_form, 'registered':registered})
 
 
-
-
 def user_login(request):
     global login_flag
     global curr_user
@@ -72,7 +68,7 @@ def user_login(request):
             login_flag = True
             curr_user = usrname
             print("Current User is " + curr_user)
-            
+
             return render(request, 'accounts/home.html', {'login_flag':login_flag})
 
         else:
@@ -83,12 +79,15 @@ def user_login(request):
     else:
         return render(request, 'accounts/login.html',{'login_flag':login_flag})
 
+
 def account_page_view(request):
     curruser = User.objects.get(username=curr_user)
     if Cart.objects.filter(user=curruser).exists():
         curr_cart = Cart.objects.get(user=curruser)
-        curr_cart_product=[]  #this is not working. get() can only return one object at a time.
-        curr_cart_product = CartProduct.objects.get(cart=curr_cart)
+        curr_cart_product=[]
+        curr_cart_product = CartProduct.objects.filter(cart=curr_cart)
+        for product in curr_cart_product:
+            print(product)
         return render(request, 'accounts/account_page.html',{'cart':curr_cart, 'cart_products':curr_cart_product})
 
     else:
