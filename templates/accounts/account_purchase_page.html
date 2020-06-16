@@ -1,0 +1,9 @@
+{% extends 'accounts/base.html' %}
+
+{% block inherit %}
+<h1>Welcome {{purchase.user.username}}! Here are your previously purchased items.</h1>
+    {% for purchase_product in purchase_products %}
+        <h3>Item : {{purchase_product.product.name}}</h3>
+        <h3>Price : {{purchase_product.product.price}}</h3>
+    {% endfor %}
+{% endblock %}

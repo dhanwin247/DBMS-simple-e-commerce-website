@@ -4,7 +4,7 @@ from accounts.forms import SignupForm
 from django.contrib.auth.hashers import make_password
 
 from django.views.generic.detail import DetailView
-from accounts.models import User, Cart, CartProduct
+from accounts.models import User, Cart, CartProduct, Purchase, PurchaseProduct
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 
@@ -99,3 +99,19 @@ def account_page_view(request):
 
     else:
         return HttpResponse("Your cart is empty")
+
+def purchase_page_view(request):
+    if request.GET.get("Purchase 'em all!") == "Purchase 'em all!" :
+        global curr_user
+        curruser = User.objects.get(username=curr_user)
+        curr_cart = Cart.objects.get(user=curruser)
+        curr_purchase = Purchase.objects.get(user=curruser)
+        purchase_products = []
+        purchase_products = CartProduct.objects.filter(cart=curr_cart)
+        for curr_product in purchase_products:
+            curr_purchase_product = PurchaseProduct(purchase=curr_purchase,product=curr_product.product)
+            curr_purchase_product.save()
+            curr_cart_product = CartProduct.objects.get(cart=curr_cart,product=curr_product.product)
+            curr_cart_product.delete()
+        all_purchase_products = PurchaseProduct.objects.filter(purchase=curr_purchase)
+        return render(request, 'accounts/account_purchase_page.html',{'purchase':curr_purchase, 'purchase_products':all_purchase_products})

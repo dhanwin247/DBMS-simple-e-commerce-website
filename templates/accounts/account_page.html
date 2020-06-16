@@ -1,9 +1,12 @@
 {% extends 'accounts/base.html' %}
 
 {% block inherit %}
-<h1>Welcome {{cart.user.username}}!</h1>
+<h1>Welcome {{cart.user.username}}! This is your cart.</h1>
     {% for cart_product in cart_products %}
         <h3>Item : {{cart_product.product.name}}</h3>
         <h3>Price : {{cart_product.product.price}}</h3>
     {% endfor %}
+    <form method="get" action="{% url 'accounts:purchase_page' %}" method="post">
+      <input type="submit" value="Purchase 'em all!" name="Purchase 'em all!"/>
+    </form>
 {% endblock %}

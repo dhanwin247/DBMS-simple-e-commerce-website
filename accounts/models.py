@@ -20,11 +20,22 @@ class Cart(models.Model):
     def __str__(self):
         return "Cart of %s" % self.user.username
 
-
-
 class CartProduct(models.Model):
     cart = models.ForeignKey(Cart,on_delete=models.CASCADE,related_name='cart_containing_product')
     product = models.ForeignKey(Phone,on_delete=models.CASCADE,related_name='product_in_cart')
 
     def __str__(self):
         return "Item in cart: %s " % self.product.name
+
+class Purchase(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return "Purchase of %s" % self.user.username
+
+class PurchaseProduct(models.Model):
+    purchase = models.ForeignKey(Purchase,on_delete=models.CASCADE,related_name='purchase_containing_product')
+    product = models.ForeignKey(Phone,on_delete=models.CASCADE,related_name='product_in_purchase')
+
+    def __str__(self):
+        return "Item in purchase: %s " % self.product.name
