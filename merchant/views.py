@@ -31,11 +31,9 @@ def register_product(request):
 
     return render(request, 'merchant/register.html', {'form':new_product_form, 'login_flag':login_flag})
 
-# @login_required
 def merchant_logout(request):
 
     global curr_merchant
-    # logout(request)
     global login_flag
 
     login_flag = False

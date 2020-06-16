@@ -32,6 +32,7 @@ def user_logout(request):
 
 def signup(request):
     global login_flag
+    global curr_user
 
     user_form = SignupForm
 
@@ -47,7 +48,8 @@ def signup(request):
             login_flag = True
             curr_user = curr_user_form.username
 
-            return HttpResponseRedirect(reverse('accounts:home'))
+            # return HttpResponseRedirect(reverse('accounts:home'))
+            return render(request, 'accounts/home.html', {'login_flag':login_flag})
 
         else:
             print('user_form.errors')
@@ -80,10 +82,14 @@ def user_login(request):
         return render(request, 'accounts/login.html',{'login_flag':login_flag})
 
 def curr_user_find():
+    global curr_user
+
     current_user = User.objects.get(username=curr_user)
     return current_user
 
 def account_page_view(request):
+    global curr_user 
+
     curruser = User.objects.get(username=curr_user)
     if Cart.objects.filter(user=curruser).exists():
         curr_cart = Cart.objects.get(user=curruser)
