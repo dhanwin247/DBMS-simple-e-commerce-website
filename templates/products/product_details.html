@@ -1,0 +1,18 @@
+{% extends 'products/product_base.html' %}
+
+{% block body_block %}
+    <div class="jumbotron">
+      <h2>Details:</h2>
+      <p>Name:{{phone.name}}</p>
+      <br>
+      <p>Brand     : {{phone.name}}</p>
+      <p>Price     : {{phone.price}}</p>
+      <p>Color     : {{phone.color}}</p>
+      <p>Display   : {{phone.display}}</p>
+      <p>Storage   : {{phone.storage}}</p>
+      <p>Processor : {{phone.processor}}</p>
+      <p>RAM       : {{phone.ram}}</p>
+      <p>Picture   : {{phone.picture}}</p>
+    </div>
+    <a href="#" class="btn btn-primary">Add to Cart!</a>
+{% endblock %}

@@ -79,6 +79,9 @@ def user_login(request):
     else:
         return render(request, 'accounts/login.html',{'login_flag':login_flag})
 
+def curr_user_find():
+    current_user = User.objects.get(username=curr_user)
+    return current_user
 
 def account_page_view(request):
     curruser = User.objects.get(username=curr_user)
