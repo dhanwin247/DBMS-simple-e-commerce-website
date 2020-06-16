@@ -14,5 +14,7 @@
       <p>RAM       : {{phone.ram}}</p>
       <p>Picture   : {{phone.picture}}</p>
     </div>
-    <a href="#" class="btn btn-primary">Add to Cart!</a>
+    <form method="get" action="{% url 'products:prodlist' %}" method="post">
+      <input type="submit" value="Add to cart!" name="Add to cart!"/>
+    </form>
 {% endblock %}

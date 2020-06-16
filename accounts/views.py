@@ -10,7 +10,7 @@ from django.urls import reverse
 
 login_flag = False
 curr_user = None
-
+curr_user_object = None
 # Create your views here.
 def home(request):
     return render(request,'accounts/home.html', {'login_flag':login_flag})
@@ -82,13 +82,11 @@ def user_login(request):
         return render(request, 'accounts/login.html',{'login_flag':login_flag})
 
 def curr_user_find():
-    global curr_user
-
-    current_user = User.objects.get(username=curr_user)
-    return current_user
+    current_user_object = User.objects.get(username=curr_user)
+    return current_user_object
 
 def account_page_view(request):
-    global curr_user 
+    global curr_user
 
     curruser = User.objects.get(username=curr_user)
     if Cart.objects.filter(user=curruser).exists():
