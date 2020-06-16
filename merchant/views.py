@@ -14,6 +14,7 @@ curr_merchant = None
 def register_product(request): 
 
     global login_flag
+    global curr_merchant
 
     new_product_form = ProductForm
 
