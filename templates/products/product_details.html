@@ -1,21 +1,135 @@
-{% extends 'products/product_base.html' %}
+<form method="get" action="{% url 'products:prodlist' %}" method="post">
+  <input type="submit" value="Add to cart!" name="Add to cart!"/>
+</form>
 
-{% block body_block %}
-    <div class="jumbotron">
-      <h2>Details:</h2>
-      <p>Name:{{phone.name}}</p>
-      <br>
-      <p>Brand     : {{phone.name}}</p>
-      <p>Price     : {{phone.price}}</p>
-      <p>Color     : {{phone.color}}</p>
-      <p>Display   : {{phone.display}}</p>
-      <p>Storage   : {{phone.storage}}</p>
-      <p>Processor : {{phone.processor}}</p>
-      <p>RAM       : {{phone.ram}}</p>
-      <!-- <p>Picture   : {{phone.picture}}</p> -->
-      <p>Picture   : <img src="{{ phone.picture.url }}" width="300px"></p>
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Product Details</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/style.min.css' %}" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link waves-effect" href="#">Home
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav nav-flex-icons">
+        <li class="nav-item">
+          <a class="nav-link waves-effect">
+            <span class="badge red z-depth-1 mr-1"> 1 </span>
+            <i class="fas fa-shopping-cart"></i>
+            <span class="clearfix d-none d-sm-inline-block"> Cart </span>
+          </a>
+        </li>
+
+      </ul>
+
     </div>
-    <form method="get" action="{% url 'products:prodlist' %}" method="post">
-      <input type="submit" value="Add to cart!" name="Add to cart!"/>
-    </form>
-{% endblock %}
+
+  </nav>
+  <main class="mt-5 pt-4">
+    <div class="container dark-grey-text mt-5">
+      <div class="row wow fadeIn">
+        <div class="col-md-6 mb-4">
+
+          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/14.jpg" class="img-fluid" alt="">
+
+        </div>
+        <div class="col-md-6 mb-4">
+          <div class="p-4">
+
+            <div class="mb-3">
+              <a href="">
+                <span class="badge purple mr-1">Category 2</span>
+              </a>
+              <a href="">
+                <span class="badge blue mr-1">New</span>
+              </a>
+              <a href="">
+                <span class="badge red mr-1">Bestseller</span>
+              </a>
+            </div>
+
+            <p class="lead">
+              <span class="mr-1">
+                <del>₹100000</del>
+              </span>
+              <span>₹{{phone.price}}</span>
+            </p>
+
+            <p class="lead font-weight-bold">Description</p>
+
+            <p><strong>{{phone.name}}</strong></p>
+            <p>Color : {{phone.color}}</p>
+            <p>Display : {{phone.display}}</p>
+            <p>Storage : {{phone.storage}}</p>
+
+            <form method="get" class="d-flex justify-content-left" action="{% url 'products:prodlist' %}">
+              <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">
+              <form method="get" >
+                <input class="btn btn-primary btn-md my-0 p" type="submit" value="Add to cart!" name="Add to cart!"/>
+              </form>
+            </form>
+
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row d-flex justify-content-center wow fadeIn">
+        <div class="col-md-6 text-center">
+
+          <h4 class="my-4 h4">Additional information</h4>
+
+          <p>Processor : {{phone.processor}}</p>
+          <p>RAM : {{phone.ram}}</p>
+
+        </div>
+      </div>
+      <div class="row wow fadeIn">
+        <div class="col-lg-4 col-md-12 mb-4">
+
+          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/11.jpg" class="img-fluid" alt="">
+
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+
+          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/12.jpg" class="img-fluid" alt="">
+
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4">
+
+          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/13.jpg" class="img-fluid" alt="">
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+  <hr class="my-4">
+  <script type="text/javascript" src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/popper.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script>
+  <script type="text/javascript">
+    new WOW().init();
+  </script>
+</body>
+
+</html>
