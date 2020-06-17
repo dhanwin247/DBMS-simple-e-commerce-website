@@ -57,7 +57,7 @@ def signup(request):
             curr_purchases.save()
 
             # return HttpResponseRedirect(reverse('accounts:home'))
-            return render(request, 'accounts/home.html', {'login_flag':login_flag})
+            return render(request, 'accounts/account_page.html', {'login_flag':login_flag})
 
         else:
             print('user_form.errors')
@@ -79,7 +79,7 @@ def user_login(request):
             curr_user = usrname
             print("Current User is " + curr_user)
 
-            return render(request, 'accounts/home.html', {'login_flag':login_flag})
+            return render(request, 'accounts/account_page.html', {'login_flag':login_flag})
 
         else:
             print("Someone tried to login and failed!")
@@ -103,7 +103,7 @@ def account_page_view(request):
         curr_cart_product = CartProduct.objects.filter(cart=curr_cart)
         for product in curr_cart_product:
             print(product)
-        return render(request, 'accounts/account_page.html',{'cart':curr_cart, 'cart_products':curr_cart_product})
+        return render(request, 'accounts/account_page.html',{'cart':curr_cart, 'cart_products':curr_cart_product, 'login_flag':login_flag})
 
     else:
         return HttpResponse("Your cart is empty")

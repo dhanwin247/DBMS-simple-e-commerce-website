@@ -9,9 +9,6 @@ from . import models
 # Create your views here.
 phone=None
 
-def product_home_view(request):
-    return render(request,'products/product_base.html')
-
 def product_list_view(request):
     curr_user_object = views.curr_user_find()
     all_products = models.Phone.objects.all()

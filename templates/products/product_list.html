@@ -57,9 +57,16 @@
         </ul>
         <ul class="navbar-nav nav-flex-icons">
           <li class="nav-item">
-            <a class="nav-link waves-effect">
+            <a class="nav-link waves-effect" href="{% url 'accounts:account_page' %}">
+              <span class="badge red z-depth-1 mr-1"> 1 </span>
               <i class="fas fa-shopping-cart"></i>
               <span class="clearfix d-none d-sm-inline-block"> Cart </span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link waves-effect" href="{% url 'accounts:purchase_page' %}">
+              <span class="clearfix d-none d-sm-inline-block"> Purchases </span>
             </a>
           </li>
         </ul>
@@ -78,7 +85,8 @@
               <div class="col-lg-3 col-md-6 mb-4">
                 <div class="card">
                   <div class="view overlay">
-                    <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg" class="card-img-top" alt="">
+                    <!-- <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg" class="card-img-top" alt=""> -->
+                    <img src="{{ phone.picture.url }}" width="300px">
                     <a>
                       <div class="mask rgba-white-slight"></div>
                     </a>

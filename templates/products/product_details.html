@@ -21,20 +21,25 @@
       </button>
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link waves-effect" href="#">Home
+          <a class="nav-link waves-effect" href="{% url 'accounts:home' %}">Home
             <span class="sr-only">(current)</span>
           </a>
         </li>
       </ul>
       <ul class="navbar-nav nav-flex-icons">
         <li class="nav-item">
-          <a class="nav-link waves-effect">
+          <a class="nav-link waves-effect" href="{% url 'accounts:account_page' %}">
             <span class="badge red z-depth-1 mr-1"> 1 </span>
             <i class="fas fa-shopping-cart"></i>
             <span class="clearfix d-none d-sm-inline-block"> Cart </span>
           </a>
         </li>
 
+        <li class="nav-item">
+          <a class="nav-link waves-effect" href="{% url 'accounts:purchase_page' %}">
+            <span class="clearfix d-none d-sm-inline-block"> Purchases </span>
+          </a>
+        </li>
       </ul>
 
     </div>
@@ -45,8 +50,8 @@
       <div class="row wow fadeIn">
         <div class="col-md-6 mb-4">
 
-          <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/14.jpg" class="img-fluid" alt="">
-
+          <!-- <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/14.jpg" class="img-fluid" alt=""> -->
+          <img src="{{ phone.picture.url }}" width="400px">
         </div>
         <div class="col-md-6 mb-4">
           <div class="p-4">
@@ -75,7 +80,7 @@
             <p><strong>{{phone.name}}</strong></p>
             <p>Color : {{phone.color}}</p>
             <p>Display : {{phone.display}}</p>
-            <p>Storage : {{phone.storage}}</p>
+            <p>Storage : {{phone.storage}}GB</p>
 
             <form method="get" class="d-flex justify-content-left" action="{% url 'products:prodlist' %}">
               <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">
@@ -94,7 +99,7 @@
           <h4 class="my-4 h4">Additional information</h4>
 
           <p>Processor : {{phone.processor}}</p>
-          <p>RAM : {{phone.ram}}</p>
+          <p>RAM : {{phone.ram}}GB</p>
 
         </div>
       </div>
