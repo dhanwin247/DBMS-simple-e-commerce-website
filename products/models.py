@@ -9,7 +9,7 @@ class Phone(models.Model):
     brand = models.CharField(max_length=50)
     processor = models.CharField(max_length=100)
     ram = models.PositiveIntegerField()
-    picture = models.ImageField(upload_to='phone_pics',blank=True) #A phone may not need an associated picture; but blank can be set to false later
+    picture = models.ImageField(upload_to='phone_pics', blank=True) #A phone may not need an associated picture; but blank can be set to false later
     price = models.PositiveIntegerField()
     
     def __str__(self):

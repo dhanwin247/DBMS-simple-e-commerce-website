@@ -21,16 +21,24 @@ def register_product(request):
     registered = False
 
     if request.method == 'POST':
-        new_product_form = ProductForm(data=request.POST)
+        new_product_form = ProductForm(request.POST, request.FILES)
 
         if new_product_form.is_valid(): 
+            # current_product = new_product_form.save()
             new_product_form.save()
             registered = True
+            # print("form valid but pic not found :(")
+
+            # if 'picture' in request.FILES:
+            #     print("found picture")
+            #     current_product.picture = request.FILES['picture']
+
+            # current_product.save()
 
         else:
             print("ERROR FORM INVALID")
 
-    return render(request, 'merchant/register.html', {'form':new_product_form, 'login_flag':login_flag})
+    return render(request, 'merchant/register.html', {'form':new_product_form, 'login_flag':login_flag}, 'registered':registered)
 
 def merchant_logout(request):
 

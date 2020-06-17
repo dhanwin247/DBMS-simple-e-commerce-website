@@ -9,7 +9,12 @@
             </div>
         {% endif %} -->
         {% if login_flag == True %}
-            <form method="POST">
+            <!-- {% if registered %}
+                <div class="jumbotron">
+                    <h1>Thank you for Registering!</h1>
+                </div>
+            {% endif %} -->
+            <form enctype="multipart/form-data" method="POST">
                 {% csrf_token %}
 
                 <input type="hidden" name="csrf-token" value="CIwNZNlR4XbisJF39I8yWnWX9wX4WFoz" />

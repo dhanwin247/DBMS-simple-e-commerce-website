@@ -12,7 +12,7 @@ class ProductForm(forms.ModelForm):
     processor = forms.CharField(widget=forms.TextInput(attrs={'name':'processor', 'type':'text', 'id':'processor', 'class':'form-control', 'required':True, 'placeholder':"Enter Processor"}))
     ram = forms.CharField(widget=forms.TextInput(attrs={'name':'ram', 'type':'text', 'id':'ram', 'class':'form-control', 'required':True, 'placeholder':"Enter RAM"}))
     price = forms.CharField(widget=forms.NumberInput(attrs={'name':'price', 'type':'number', 'id':'price', 'class':'form-control', 'required':True, 'placeholder':"Enter Price"}))
-    # picture = forms.ImageField(blank=True)
+    # picture = forms.ImageField()
     class Meta():
         model = Phone
         fields = "__all__"
