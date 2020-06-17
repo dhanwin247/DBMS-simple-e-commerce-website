@@ -23,6 +23,7 @@ class Cart(models.Model):
 class CartProduct(models.Model):
     cart = models.ForeignKey(Cart,on_delete=models.CASCADE,related_name='cart_containing_product')
     product = models.ForeignKey(Phone,on_delete=models.CASCADE,related_name='product_in_cart')
+    quantity = models.PositiveIntegerField()
 
     def __str__(self):
         return "Item in cart: %s " % self.product.name
@@ -36,6 +37,7 @@ class Purchase(models.Model):
 class PurchaseProduct(models.Model):
     purchase = models.ForeignKey(Purchase,on_delete=models.CASCADE,related_name='purchase_containing_product')
     product = models.ForeignKey(Phone,on_delete=models.CASCADE,related_name='product_in_purchase')
+    quantity = models.PositiveIntegerField()
 
     def __str__(self):
         return "Item in purchase: %s " % self.product.name
