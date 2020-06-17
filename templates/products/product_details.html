@@ -12,7 +12,8 @@
       <p>Storage   : {{phone.storage}}</p>
       <p>Processor : {{phone.processor}}</p>
       <p>RAM       : {{phone.ram}}</p>
-      <p>Picture   : {{phone.picture}}</p>
+      <!-- <p>Picture   : {{phone.picture}}</p> -->
+      <p>Picture   : <img src="{{ phone.picture.url }}" width="300px"></p>
     </div>
     <form method="get" action="{% url 'products:prodlist' %}" method="post">
       <input type="submit" value="Add to cart!" name="Add to cart!"/>

@@ -48,6 +48,14 @@ def signup(request):
             login_flag = True
             curr_user = curr_user_form.username
 
+            cart_user = User.objects.get(username=curr_user)
+            curr_cart = Cart(user=cart_user)
+            curr_cart.save()
+
+            purchase_user = User.objects.get(username=curr_user)
+            curr_purchases = Purchase(user=purchase_user)
+            curr_purchases.save()
+
             # return HttpResponseRedirect(reverse('accounts:home'))
             return render(request, 'accounts/home.html', {'login_flag':login_flag})
 

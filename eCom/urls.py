@@ -18,10 +18,14 @@ from django.urls import path,include
 from accounts import views as account_views
 from merchant import views as merchant_views
 from products import urls as produrls
+from django.conf.urls.static import static
+from django.conf import settings
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('accounts.urls',namespace='accounts')),
     path('logout/',account_views.user_logout,name='user_logout'),
     path('products/',include(produrls,namespace='products')),
     path('merchant/',include('merchant.urls')),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

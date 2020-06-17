@@ -38,7 +38,7 @@ def register_product(request):
         else:
             print("ERROR FORM INVALID")
 
-    return render(request, 'merchant/register.html', {'form':new_product_form, 'login_flag':login_flag}, 'registered':registered)
+    return render(request, 'merchant/register.html', {'form':new_product_form, 'login_flag':login_flag})
 
 def merchant_logout(request):
 
