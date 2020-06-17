@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 {% extends "accounts/base.html" %}
 {% block inherit %}
+<div style="text-align:center" class="footer-copyright py-3">
+</div>
+<div style="text-align:center" class="footer-copyright py-3">
+</div>
+<div style="text-align:center" class="footer-copyright py-3">
+</div>
     <div class="container">
         {% if registered %}
             <div class="jumbotron">
@@ -8,7 +14,7 @@
             </div>
         {% else %}
             {% csrf_token %}
-            
+
             <form method="POST">
                 {% csrf_token %}
 
@@ -68,5 +74,7 @@
                 <button type="submit" class="btn btn-primary btn-block">Submit</button>
             </form>
         {% endif %}
+    </div>
+    <div style="text-align:center" class="footer-copyright py-3">
     </div>
 {% endblock %}
