@@ -18,6 +18,7 @@ from django.urls import path,include
 from accounts import views as account_views
 from merchant import views as merchant_views
 from products import urls as produrls
+from merchant import urls as mercurls
 from django.conf.urls.static import static
 from django.conf import settings
 from . import views
@@ -29,5 +30,5 @@ urlpatterns = [
     path('',include('accounts.urls',namespace='accounts')),
     path('logout/',account_views.user_logout,name='user_logout'),
     path('products/',include(produrls,namespace='products')),
-    path('merchant/',include('merchant.urls')),
+    path('merchant/',include(mercurls,namespace='merchant')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
