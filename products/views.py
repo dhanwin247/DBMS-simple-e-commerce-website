@@ -12,6 +12,16 @@ phone=None
 def product_list_view(request):
     curr_user_object = views.curr_user_find()
     all_products = models.Phone.objects.all()
+    phone_matrix = []
+    curr_list = []
+    for phone in all_products:
+        if len(curr_list) == 3:
+            phone_matrix.append(curr_list)
+            curr_list = []
+        curr_list.append(phone)
+    if curr_list:
+        phone_matrix.append(curr_list)
+
     if request.GET.get('Add to cart!') == 'Add to cart!':
         curr_cart = Cart.objects.get(user=curr_user_object)
         if not CartProduct.objects.filter(cart=curr_cart, product=phone).exists():
@@ -21,7 +31,7 @@ def product_list_view(request):
             cart_product.save()
         else:
             print( )
-    return render(request,'products/product_list.html',{'all_products':all_products})
+    return render(request,'products/product_list.html',{'phone_matrix':phone_matrix})
 
 def product_detail_view(request,product_id):
     global phone

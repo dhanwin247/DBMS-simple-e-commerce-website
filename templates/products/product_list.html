@@ -80,9 +80,10 @@
         <br><br><br><br>
 {% block body_block %}
         <h1>Welcome! Here is the list of smartphones available for sale!</h1><br>
-          {% for phone in all_products %}
+          {% for item in phone_matrix %}
             <div class="row wow fadeIn">
-              <div class="col-lg-3 col-md-6 mb-4">
+              {% for phone in item %}
+              <div class="col-lg col-md-6 mb-4">
                 <div class="card">
                   <div class="view overlay">
                     <!-- <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg" class="card-img-top" alt=""> -->
@@ -111,6 +112,7 @@
                   </div>
                 </div>
               </div>
+              {% endfor %}
             </div>
           {% endfor %}
 {% endblock %}
