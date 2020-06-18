@@ -128,7 +128,7 @@ def purchase_page_view(request):
             curr_cart_product = CartProduct.objects.get(cart=curr_cart,product=curr_product.product)
             curr_cart_product.delete()
         all_purchase_products = PurchaseProduct.objects.filter(purchase=curr_purchase)
-        return render(request, 'accounts/account_purchase_page.html',{'purchase':curr_purchase, 'purchase_products':all_purchase_products})
+        return render(request, 'accounts/account_purchase_page.html',{'purchase':curr_purchase, 'purchase_products':all_purchase_products, 'login_flag':login_flag})
 
 def add_quantity(request):
     global curr_user
