@@ -57,7 +57,7 @@ def signup(request):
             curr_purchases.save()
 
             # return HttpResponseRedirect(reverse('accounts:home'))
-            return render(request, 'accounts/account_page.html', {'login_flag':login_flag})
+            return render(request, 'accounts/account_page.html')
 
         else:
             print('user_form.errors')
@@ -79,7 +79,7 @@ def user_login(request):
             curr_user = usrname
             print("Current User is " + curr_user)
 
-            return render(request, 'accounts/account_page.html', {'login_flag':login_flag})
+            return HttpResponseRedirect(reverse('accounts:account_page'))
 
         else:
             print("Someone tried to login and failed!")
@@ -103,7 +103,7 @@ def account_page_view(request):
         curr_cart_product = CartProduct.objects.filter(cart=curr_cart)
         for product in curr_cart_product:
             print(product)
-        
+
         total = 0
         num_products = 0
         for p in curr_cart_product:
@@ -115,7 +115,7 @@ def account_page_view(request):
         return HttpResponse("Your cart is empty")
 
 def purchase_page_view(request):
-    if request.GET.get("Purchase 'em all!") == "Purchase 'em all!" :
+    # if request.GET.get("Purchase 'em all!") == "Purchase 'em all!" :
         global curr_user
         curruser = User.objects.get(username=curr_user)
         curr_cart = Cart.objects.get(user=curruser)
@@ -135,7 +135,7 @@ def add_quantity(request):
 
     curruser = User.objects.get(username=curr_user)
     curr_cart = Cart.objects.get(user=curruser)
-    
+
     cart_product_id = request.GET.get('cart_product')
     cart_product = CartProduct.objects.get(id=cart_product_id)
     cart_product.quantity += 1
@@ -145,13 +145,13 @@ def add_quantity(request):
 
     return HttpResponseRedirect(reverse('accounts:account_page'))
     # return render(request, 'accounts/account_page.html',{'cart':curr_cart, 'cart_products':curr_cart_product, 'login_flag':login_flag})
-    
+
 def subtract_quantity(request):
     global curr_user
 
     curruser = User.objects.get(username=curr_user)
     curr_cart = Cart.objects.get(user=curruser)
-    
+
     cart_product_id = request.GET.get('cart_product')
     cart_product = CartProduct.objects.get(id=cart_product_id)
 
@@ -162,6 +162,6 @@ def subtract_quantity(request):
         cart_product.save()
 
     curr_cart_product = CartProduct.objects.filter(cart=curr_cart)
-    
+
     return HttpResponseRedirect(reverse('accounts:account_page'))
     # return render(request, 'accounts/account_page.html',{'cart':curr_cart, 'cart_products':curr_cart_product, 'login_flag':login_flag, 'total':total})
