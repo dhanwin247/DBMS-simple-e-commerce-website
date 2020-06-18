@@ -13,9 +13,10 @@ def product_list_view(request):
     curr_user_object = views.curr_user_find()
     all_products = models.Phone.objects.all()
     if request.GET.get('Add to cart!') == 'Add to cart!':
-        if not CartProduct.objects.filter(product=phone).exists():
+        curr_cart = Cart.objects.get(user=curr_user_object)
+        if not CartProduct.objects.filter(cart=curr_cart, product=phone).exists():
             print("the current user is {}".format(curr_user_object.username))
-            curr_cart = Cart.objects.get(user=curr_user_object)
+            # curr_cart = Cart.objects.get(user=curr_user_object)
             cart_product = CartProduct(cart=curr_cart,product=phone,quantity=1)
             cart_product.save()
         else:
