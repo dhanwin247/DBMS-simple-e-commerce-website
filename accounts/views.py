@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from accounts.models import User
 from accounts.forms import SignupForm
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password, check_password
 
 from django.views.generic.detail import DetailView
 from accounts.models import User, Cart, CartProduct, Purchase, PurchaseProduct
@@ -43,6 +43,9 @@ def signup(request):
 
         if user_form.is_valid():
             curr_user_form = user_form.save()
+            p_word = make_password(curr_user_form.password)
+            curr_user_form.password = p_word
+            curr_user_form.save()
 
             registered = True
             login_flag = True
@@ -73,7 +76,7 @@ def user_login(request):
         usrname = request.POST.get('username')
         passwrd = request.POST.get('password')
 
-        if User.objects.filter(username=usrname).exists() and User.objects.get(username=usrname).password == passwrd:
+        if User.objects.filter(username=usrname).exists() and check_password(passwrd, User.objects.get(username=usrname).password):
             print("Logged in!")
             login_flag = True
             curr_user = usrname
