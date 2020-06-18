@@ -103,7 +103,11 @@ def account_page_view(request):
         curr_cart_product = CartProduct.objects.filter(cart=curr_cart)
         for product in curr_cart_product:
             print(product)
-        return render(request, 'accounts/account_page.html',{'cart':curr_cart, 'cart_products':curr_cart_product, 'login_flag':login_flag})
+        
+        total = 0
+        for p in curr_cart_product:
+            total += p.quantity * p.product.price
+        return render(request, 'accounts/account_page.html',{'cart':curr_cart, 'cart_products':curr_cart_product, 'login_flag':login_flag, 'total':total})
 
     else:
         return HttpResponse("Your cart is empty")
@@ -117,9 +121,45 @@ def purchase_page_view(request):
         purchase_products = []
         purchase_products = CartProduct.objects.filter(cart=curr_cart)
         for curr_product in purchase_products:
-            curr_purchase_product = PurchaseProduct(purchase=curr_purchase,product=curr_product.product)
+            curr_purchase_product = PurchaseProduct(purchase=curr_purchase,product=curr_product.product,quantity=curr_product.quantity)
             curr_purchase_product.save()
             curr_cart_product = CartProduct.objects.get(cart=curr_cart,product=curr_product.product)
             curr_cart_product.delete()
         all_purchase_products = PurchaseProduct.objects.filter(purchase=curr_purchase)
         return render(request, 'accounts/account_purchase_page.html',{'purchase':curr_purchase, 'purchase_products':all_purchase_products})
+
+def add_quantity(request):
+    global curr_user
+
+    curruser = User.objects.get(username=curr_user)
+    curr_cart = Cart.objects.get(user=curruser)
+    
+    cart_product_id = request.GET.get('cart_product')
+    cart_product = CartProduct.objects.get(id=cart_product_id)
+    cart_product.quantity += 1
+    cart_product.save()
+
+    curr_cart_product = CartProduct.objects.filter(cart=curr_cart)
+
+    return HttpResponseRedirect(reverse('accounts:account_page'))
+    # return render(request, 'accounts/account_page.html',{'cart':curr_cart, 'cart_products':curr_cart_product, 'login_flag':login_flag})
+    
+def subtract_quantity(request):
+    global curr_user
+
+    curruser = User.objects.get(username=curr_user)
+    curr_cart = Cart.objects.get(user=curruser)
+    
+    cart_product_id = request.GET.get('cart_product')
+    cart_product = CartProduct.objects.get(id=cart_product_id)
+
+    if cart_product.quantity == 1:
+        CartProduct.objects.filter(id=cart_product_id).delete()
+    else:
+        cart_product.quantity -= 1
+        cart_product.save()
+
+    curr_cart_product = CartProduct.objects.filter(cart=curr_cart)
+    
+    return HttpResponseRedirect(reverse('accounts:account_page'))
+    # return render(request, 'accounts/account_page.html',{'cart':curr_cart, 'cart_products':curr_cart_product, 'login_flag':login_flag, 'total':total})

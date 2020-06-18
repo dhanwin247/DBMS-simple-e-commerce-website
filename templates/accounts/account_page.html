@@ -160,14 +160,14 @@
               <h6 class="my-0">Quantity: {{cart_product.quantity}}</h6>
               <br>
               <small class="text-muted">
-                <a href="">
+                <a href="product_add/?cart_product={{ cart_product.id }}">
                   <svg class="bi bi-plus" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
                     <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>
                   </svg>
                 </a>
 
-                <a href="">
+                <a href="product_subtract/?cart_product={{ cart_product.id }}">
                   <svg class="bi bi-dash" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M3.5 8a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.5-.5z"/>
                   </svg>
@@ -179,7 +179,7 @@
           {% endfor %}
           <li class="list-group-item d-flex justify-content-between">
             <span>Total (INR)</span>
-            <strong>₹0000</strong>
+            <strong>₹{{total}}</strong>
           </li>
         </ul>
 
