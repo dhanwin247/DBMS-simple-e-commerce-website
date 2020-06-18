@@ -56,8 +56,8 @@ def signup(request):
             curr_purchases = Purchase(user=purchase_user)
             curr_purchases.save()
 
-            # return HttpResponseRedirect(reverse('accounts:home'))
-            return render(request, 'accounts/account_page.html')
+  
+            return HttpResponseRedirect(reverse('accounts:account_page'))
 
         else:
             print('user_form.errors')
