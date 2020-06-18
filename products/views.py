@@ -12,13 +12,14 @@ phone=None
 def product_list_view(request):
     curr_user_object = views.curr_user_find()
     all_products = models.Phone.objects.all()
+
     phone_matrix = []
     curr_list = []
-    for phone in all_products:
+    for smartphone in all_products:
         if len(curr_list) == 3:
             phone_matrix.append(curr_list)
             curr_list = []
-        curr_list.append(phone)
+        curr_list.append(smartphone)
     if curr_list:
         phone_matrix.append(curr_list)
 
