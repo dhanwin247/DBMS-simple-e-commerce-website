@@ -105,9 +105,11 @@ def account_page_view(request):
             print(product)
         
         total = 0
+        num_products = 0
         for p in curr_cart_product:
+            num_products += p.quantity
             total += p.quantity * p.product.price
-        return render(request, 'accounts/account_page.html',{'cart':curr_cart, 'cart_products':curr_cart_product, 'login_flag':login_flag, 'total':total})
+        return render(request, 'accounts/account_page.html',{'cart':curr_cart, 'cart_products':curr_cart_product, 'login_flag':login_flag, 'total':total, 'num_products':num_products})
 
     else:
         return HttpResponse("Your cart is empty")
