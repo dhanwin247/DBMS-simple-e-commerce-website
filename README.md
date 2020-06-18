@@ -21,10 +21,11 @@ pip install -r requirements.txt
 ```
 
 ### Running the website locally
-```bash
+
 Update settings.py:
   1. Make DEBUG = True
-  2. In DATABASES option , uncomment the commented and comment the uncomment 
+  
+```bash
 cd ~/eCom
 python manage.py makemigrations
 python manage.py migrate
