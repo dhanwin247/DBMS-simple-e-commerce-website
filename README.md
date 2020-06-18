@@ -22,8 +22,7 @@ pip install -r requirements.txt
 
 ### Running the website locally
 
-Update settings.py:
-  1. Make DEBUG = True
+Update settings.py: make DEBUG = True
   
 ```bash
 cd ~/eCom
