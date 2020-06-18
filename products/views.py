@@ -36,4 +36,13 @@ def product_list_view(request):
 def product_detail_view(request,product_id):
     global phone
     phone = models.Phone.objects.get(pk=product_id)
-    return render(request,'products/product_details.html',{'phone':phone})
+    
+    MRP = phone.price
+    if phone.brand == 'Apple':
+        MRP = phone.price * 1.3
+    elif phone.brand == 'Samsung':
+        MRP = phone.price * 1.2
+    else:
+        MRP = phone.price * 1.1
+
+    return render(request,'products/product_details.html',{'phone':phone, 'MRP':MRP})
