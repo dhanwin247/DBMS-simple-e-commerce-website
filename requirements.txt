@@ -1,4 +1,4 @@
 django==3.0.7
-python==3.6.9
 django[argon2]
+bcrypt
 pillow
