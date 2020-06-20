@@ -26,7 +26,7 @@ SECRET_KEY = 'a@qi27n%o*w_5_@4)%k2!--ix)t82@jv)e7yaki8m91_v!jcql'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['eComClone.pythonanywhere.com']
 
 # Application definition
 
