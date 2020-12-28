@@ -1,6 +1,6 @@
 # eCom
 
-An e-commerce platform created using Django.
+An e-commerce platform created using Django as a mini-project for the DBMS course.
 
 ## Dependencies
 - Django (3.0.7)
