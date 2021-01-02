@@ -30,9 +30,6 @@ python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
 ```
-To login as a merchant, use : 
-- Username- eCom
-- Password- eCom
 
 ## Contributors
 - Dhanwin Rao  https://github.com/dhanwin247/
